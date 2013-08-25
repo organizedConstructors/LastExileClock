@@ -35,8 +35,6 @@ public class ClockLiveWallpaperService  extends WallpaperService {
         private int statusBarHeight;
 
         private final Paint mPaint = new Paint();
-        private float mCenterX;
-        private float mCenterY;
 
         private Bitmap dial, hoursBmp, minutesBmp, secondsBmp;
         private Integer dialW, dialH, armW, armH;
@@ -111,9 +109,6 @@ public class ClockLiveWallpaperService  extends WallpaperService {
         @Override
         public void onSurfaceChanged(SurfaceHolder holder, int format, int width, int height) {
             super.onSurfaceChanged(holder, format, width, height);
-            // store the center of the surface, so we can draw the cube in the right spot
-            mCenterX = width/2.0f;
-            mCenterY = height/2.0f;
             drawFrame();
         }
 
@@ -185,9 +180,9 @@ public class ClockLiveWallpaperService  extends WallpaperService {
             // Origin at center
             int MAGIC_SHIFT_MEH = -5;
             c.translate(dialW/2, dialH/4 + MAGIC_SHIFT_MEH);
-            c.drawBitmap(hoursBmp, getRotator(hoursDegree, armW, armH), mPaint);
-            c.drawBitmap(minutesBmp, getRotator(minutesDegree, armW, armH), mPaint);
             c.drawBitmap(secondsBmp, getRotator(secondsDegree, armW, armH), mPaint);
+            c.drawBitmap(minutesBmp, getRotator(minutesDegree, armW, armH), mPaint);
+            c.drawBitmap(hoursBmp, getRotator(hoursDegree, armW, armH), mPaint);
 
             c.restore();
         }
